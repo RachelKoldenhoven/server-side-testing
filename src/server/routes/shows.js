@@ -27,9 +27,15 @@ router.post('/shows', function(req, res, next) {
 });
 
 
-router.post('/shows/:id', function(req, res, next) {
+router.put('/shows/:id', function(req, res, next) {
   Shows().where('id', req.params.id).update(req.body).returning('id').then(function(result) {
-    console.log('hello');
+    res.status(200).json(result);
+  })
+});
+
+
+router.delete('/shows/:id', function(req, res, next) {
+  Shows().where('id', req.params.id).del().then(function(result) {
     res.status(200).json(result);
   })
 });

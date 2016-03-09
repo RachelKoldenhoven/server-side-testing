@@ -92,11 +92,10 @@ describe('API routes', function() {
                   explicit : false
               })
               .end(function(err, res) {
-                  console.log(res.body);
 
                   chai.request(server)
                     .get('api/shows/' + res.body[0])
-                    .end(function(error, response) {
+                    .end(function(error, res) {
                         res.should.have.status(200);
                         res.should.be.json;
                         res.body.should.be.a('array');
@@ -131,11 +130,10 @@ describe('API routes', function() {
                   explicit: false
               })
               .end(function(err, res) {
-                  console.log(res.body);
 
                   chai.request(server)
                     .get('/api/shows/' + res.body)
-                    .end(function(error, response) {
+                    .end(function(error, res) {
                         res.should.have.status(200);
                         res.should.be.json;
                         res.body.should.be.a('array');
@@ -155,6 +153,19 @@ describe('API routes', function() {
               });
         });
     });
+
+  describe('Delete a show', function() {
+
+    it('should edit a show', function(done) {
+      chai.request(server)
+        .delete('/api/shows/1')
+        .end(function(err, res) {
+            res.should.have.status(200);
+          done();
+        });
+    });
+
+  });
 
 
 });
